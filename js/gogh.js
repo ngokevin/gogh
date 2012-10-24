@@ -1,13 +1,13 @@
 var canvas, ctx;
 
 $(document).ready(function() {
-     window.requestAnimFrame = (function(){
+     window.requestAnimFrame = (function() {
         return  window.requestAnimationFrame       ||
                 window.webkitRequestAnimationFrame ||
                 window.mozRequestAnimationFrame    ||
                 window.oRequestAnimationFrame      ||
                 window.msRequestAnimationFrame     ||
-                function( callback ){
+                function(callback) {
                     window.setTimeout(callback, 1000 / 60);
                 };
     })();
@@ -18,6 +18,7 @@ $(document).ready(function() {
     var elements = [];
     elements.push([new Sky()]);
     elements.push([new Ground()]);
+    elements.push([new Tree()]);
 
     gogh(elements);
 

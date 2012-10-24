@@ -1,7 +1,7 @@
 function Sky() {
     this.children = [];
 
-    var color = 'rgb(130, 60, 240)';
+    var color = 'rgb(160, 90, 250)';
     var childNum = randInt(15, 25);
 
     // Make few more children to cover the top right since drawing angled.
@@ -60,7 +60,7 @@ SkyChild.prototype = {
         ctx.translate(canvas.width / -2, 0);
 
         ctx.fillStyle = ctx.shadowColor = this.color;
-        ctx.shadowBlur = 10;
+        ctx.shadowBlur = 5;
         ctx.shadowOffsetX = ctx.shadowOffsetY = this.radius * this.angle;
 
         ctx.beginPath();

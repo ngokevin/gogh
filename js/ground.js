@@ -52,7 +52,7 @@ GroundChild.prototype = {
         ctx.save();
 
         ctx.fillStyle = ctx.shadowColor = this.color;
-        ctx.shadowBlur = 10;
+        ctx.shadowBlur = 5;
         ctx.shadowOffsetX = this.radius;
 
         ctx.beginPath();
