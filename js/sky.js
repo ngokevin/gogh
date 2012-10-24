@@ -1,5 +1,4 @@
-function Sky(canvas) {
-    this.canvas = canvas;
+function Sky() {
     this.children = [];
 
     var color = 'rgb(80, 40, 200)';
@@ -8,16 +7,21 @@ function Sky(canvas) {
     // Make few more children to cover the top right since drawing angled.
     for (var i = 0; i < Math.floor(childNum * 4 / 3); i++) {
         this.add(new SkyChild(canvas.width / childNum * i,
-                              canvas.width / childNum / 2, 3,
+                              canvas.width / childNum, 3,
                               fuzzColor(color, 15)));
     }
 }
 
 Sky.prototype = {
     drawFrame: function() {
+        if (this.children.length = 0) {
+            this.done = true;
+            return;
+        }
+
         var that = this;
         $(this.children).each(function(i, child) {
-            if (child.dead) {
+            if (child.done) {
                 that.remove(child);
             }
             child.drawFrame();
@@ -69,7 +73,7 @@ SkyChild.prototype = {
 
     update: function() {
         if (this.absY > .66 * canvas.height) {
-            this.dead = true;
+            this.done = true;
         }
         this.y += this.speed;
 
