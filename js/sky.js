@@ -1,56 +1,65 @@
-function SkyCollection(canvas) {
+function Sky(canvas) {
     this.canvas = canvas;
-    this.strokes = [];
+    this.children = [];
 
     var color = 'rgb(80, 40, 200)';
-    var strokeNum = 15;
+    var childNum = randInt(15, 30);
 
-    for (var i = 0; i < strokeNum; i++) {
-        this.strokes.push(new SkyStroke(canvas.width / strokeNum * i,
-                                        canvas.width / strokeNum / 2, 3,
-                                        color));
+    // Make few more children to cover the top right since drawing angled.
+    for (var i = 0; i < Math.floor(childNum * 4 / 3); i++) {
+        this.add(new SkyChild(canvas.width / childNum * i,
+                              canvas.width / childNum / 2, 3,
+                              fuzzColor(color, 15)));
     }
 }
 
-SkyCollection.prototype = {
+Sky.prototype = {
     drawFrame: function() {
-        var collection = this;
-        $(this.strokes).each(function(i, stroke) {
-            if (stroke.dead) {
-                collection.remove(stroke);
+        var that = this;
+        $(this.children).each(function(i, child) {
+            if (child.dead) {
+                that.remove(child);
             }
-            stroke.drawFrame();
+            child.drawFrame();
         });
     },
 
-    add: function(stroke) {
-        this.strokes.add(stroke);
-        stroke.collection = this;
+    add: function(child) {
+        this.children.push(child);
     },
 
-    remove: function(stroke) {
-        var index = this.strokes.indexOf(stroke);
-        this.strokes.splice(index, 1);
+    remove: function(child) {
+        var index = this.children.indexOf(child);
+        this.children.splice(index, 1);
     }
 };
 
 
-function SkyStroke(x, width, speed, color) {
+function SkyChild(x, radius, speed, color) {
     this.x = x;
     this.y = 0;
-    this.width = width;
+    this.radius= radius;
     this.speed = speed + Math.floor(Math.random() * 5);
     this.color = color;
+
+    // Factor in canvas rotation and translation.
+    this.absY = -1 * (this.x - canvas.width / 2) * Math.cos(rad(45));
 }
 
-SkyStroke.prototype = {
+SkyChild.prototype = {
     drawFrame: function() {
         ctx.save();
+
+        ctx.rotate(rad(-45));
+        ctx.translate(canvas.width / -2, 0);
+
         ctx.fillStyle = ctx.shadowColor = this.color;
         ctx.shadowBlur = 10;
+        ctx.shadowOffsetX= this.radius;
+        ctx.shadowOffsetY= this.radius;
 
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.width, 0, Math.PI * 2, true);
+        ctx.arc(this.x, this.y, this.radius, 0, rad(360), true);
         ctx.fill();
 
         ctx.restore();
@@ -58,9 +67,12 @@ SkyStroke.prototype = {
     },
 
     update: function() {
-        if (this.y > .75 * canvas.height) {
+        if (this.absY > .7 * canvas.height) {
             this.dead = true;
         }
         this.y += this.speed;
+
+        // Factor in angled speed.
+        this.absY += this.speed * Math.sin(rad(45));
     },
 };

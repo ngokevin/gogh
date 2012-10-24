@@ -18,11 +18,14 @@ $(document).ready(function() {
     var y = 0;
     var w = canvas.width;
     var h = canvas.height;
+    var elements = [];
 
-    var sky = new SkyCollection(canvas);
+    elements.push(new Sky(canvas));
 
     function gogh() {
-        sky.drawFrame();
+        $(elements).each(function(i, element) {
+            element.drawFrame();
+        });
 
         // Request new frame.
         requestAnimFrame(function() {
