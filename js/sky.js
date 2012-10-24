@@ -3,7 +3,7 @@ function Sky(canvas) {
     this.children = [];
 
     var color = 'rgb(80, 40, 200)';
-    var childNum = randInt(15, 30);
+    var childNum = randInt(15, 25);
 
     // Make few more children to cover the top right since drawing angled.
     for (var i = 0; i < Math.floor(childNum * 4 / 3); i++) {
@@ -42,8 +42,10 @@ function SkyChild(x, radius, speed, color) {
     this.speed = speed + Math.floor(Math.random() * 5);
     this.color = color;
 
+    this.angle = Math.sin(rad(45));
+
     // Factor in canvas rotation and translation.
-    this.absY = -1 * (this.x - canvas.width / 2) * Math.cos(rad(45));
+    this.absY = -1 * (this.x - canvas.width / 2) * this.angle;
 }
 
 SkyChild.prototype = {
@@ -55,8 +57,7 @@ SkyChild.prototype = {
 
         ctx.fillStyle = ctx.shadowColor = this.color;
         ctx.shadowBlur = 10;
-        ctx.shadowOffsetX= this.radius;
-        ctx.shadowOffsetY= this.radius;
+        ctx.shadowOffsetX = ctx.shadowOffsetY = this.radius * this.angle;
 
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, rad(360), true);
@@ -67,12 +68,12 @@ SkyChild.prototype = {
     },
 
     update: function() {
-        if (this.absY > .7 * canvas.height) {
+        if (this.absY > .66 * canvas.height) {
             this.dead = true;
         }
         this.y += this.speed;
 
         // Factor in angled speed.
-        this.absY += this.speed * Math.sin(rad(45));
+        this.absY += this.speed * this.angle;
     },
 };
