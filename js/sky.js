@@ -39,7 +39,7 @@ function SkyStroke(x, width, speed, color) {
     this.x = x;
     this.y = 0;
     this.width = width;
-    this.speed = speed;
+    this.speed = speed + Math.floor(Math.random() * 5);
     this.color = color;
 }
 
@@ -58,9 +58,9 @@ SkyStroke.prototype = {
     },
 
     update: function() {
-        this.y += this.speed;
-        if (this.y > canvas.width) {
+        if (this.y > .75 * canvas.height) {
             this.dead = true;
         }
+        this.y += this.speed;
     },
 };
