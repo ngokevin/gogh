@@ -1,14 +1,14 @@
 function Ground() {
-    var height = Math.floor(canvas.height / 3);
     this.children = [];
 
-    var color = 'rgb(40, 200, 80)';
+    var color = 'rgb(40, 220, 100)';
     var childNum = randInt(10, 15);
 
+    var height = Math.floor(canvas.height / 3);
     for (var i = 0; i < childNum; i++) {
         this.add(new GroundChild(height / childNum * i + canvas.height - height,
                                  height / childNum, 3,
-                                 fuzzColor(color, 25)));
+                                 fuzzColor(color, 10)));
     }
 }
 

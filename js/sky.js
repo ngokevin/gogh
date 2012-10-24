@@ -1,20 +1,20 @@
 function Sky() {
     this.children = [];
 
-    var color = 'rgb(80, 40, 200)';
+    var color = 'rgb(130, 60, 240)';
     var childNum = randInt(15, 25);
 
     // Make few more children to cover the top right since drawing angled.
     for (var i = 0; i < Math.floor(childNum * 4 / 3); i++) {
         this.add(new SkyChild(canvas.width / childNum * i,
-                              canvas.width / childNum, 3,
-                              fuzzColor(color, 15)));
+                              canvas.width / childNum, 5,
+                              fuzzColor(color, 10)));
     }
 }
 
 Sky.prototype = {
     drawFrame: function() {
-        if (this.children.length = 0) {
+        if (this.children.length == 0) {
             this.done = true;
             return;
         }
@@ -76,6 +76,11 @@ SkyChild.prototype = {
             this.done = true;
         }
         this.y += this.speed;
+
+        // Sunset-like gradient.
+        if (this.absY > .33 * canvas.height) {
+            this.color = fuzzColor(this.color, 3, 'rb');
+        }
 
         // Factor in angled speed.
         this.absY += this.speed * this.angle;
