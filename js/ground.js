@@ -4,7 +4,7 @@ function Ground() {
     var color = 'rgb(40, 220, 100)';
     var childNum = randInt(10, 15);
 
-    var height = Math.floor(canvas.height / 3);
+    var height = Math.floor(canvas.height / 4);
     for (var i = 0; i < childNum; i++) {
         this.add(new GroundChild(height / childNum * i + canvas.height - height,
                                  height / childNum, 3,

@@ -31,3 +31,8 @@ function randInt (min, max) {
 function rad(deg) {
     return deg * Math.PI / 180;
 }
+
+
+function deg(rad) {
+    return rad * 180 / Math.PI;
+}

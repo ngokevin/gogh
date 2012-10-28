@@ -1,7 +1,7 @@
 function Sky() {
     this.children = [];
 
-    var color = 'rgb(160, 90, 250)';
+    var color = 'rgb(120, 90, 250)';
     var childNum = randInt(15, 25);
 
     // Make few more children to cover the top right since drawing angled.
