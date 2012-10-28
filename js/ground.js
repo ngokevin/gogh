@@ -1,14 +1,15 @@
 function Ground() {
-    this.speed = 8;
+    this.speed = 9;
     this.children = [];
 
     var color = '#138900';
-    var childNum = randInt(80, 100);
+    var childNum = 25;
 
-    var height = Math.floor(canvas.height * .33);
+    var height = Math.floor(canvasHeight * .33);
     for (var i = 0; i < childNum; i++) {
-        this.add(new GroundChild(height / childNum * i + canvas.height - height,
-                                 height / childNum * this.speed, this.speed,
+        // Draw ground at the bottom.
+        this.add(new GroundChild(height / childNum * i + canvasHeight - height,
+                                 height / childNum, this.speed,
                                  fuzzColor(color, 12)));
     }
 }
@@ -20,6 +21,8 @@ Ground.prototype = {
             return;
         }
 
+        ctx.save();
+
         var that = this;
         $(this.children).each(function(i, child) {
             if (child.done) {
@@ -27,6 +30,8 @@ Ground.prototype = {
             }
             child.drawFrame();
         });
+
+        ctx.restore();
     },
 
     add: function(child) {
@@ -44,28 +49,25 @@ function GroundChild(y, radius, speed, color) {
     this.x = 0;
     this.y = y;
     this.radius= radius;
-    this.speed = speed + Math.floor(Math.random() * 5);
+    this.speed = speed;
     this.color = color;
 }
 
 GroundChild.prototype = {
     drawFrame: function() {
-        ctx.save();
-
         ctx.fillStyle = ctx.shadowColor = this.color;
         ctx.shadowBlur = 5;
         ctx.shadowOffsetX = this.radius;
 
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, rad(360), true);
+        ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, true);
         ctx.fill();
 
-        ctx.restore();
         this.update();
     },
 
     update: function() {
-        if (this.x > canvas.width) {
+        if (this.x > canvasWidth) {
             this.done = true;
         }
         this.x += this.speed;

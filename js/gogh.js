@@ -1,4 +1,4 @@
-var canvas, ctx;
+var canvas, ctx, canvasHeight, canvasWidth;
 
 $(document).ready(function() {
      window.requestAnimFrame = (function() {
@@ -14,6 +14,8 @@ $(document).ready(function() {
 
     canvas = $('#canvas').get(0);
     ctx = canvas.getContext('2d');
+    canvasHeight = canvas.height;
+    canvasWidth = canvas.width;
 
     var elements = [];
     elements.push([new Ground(), new Sky()]);
