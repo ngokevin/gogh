@@ -16,8 +16,7 @@ $(document).ready(function() {
     ctx = canvas.getContext('2d');
 
     var elements = [];
-    elements.push([new Sky()]);
-    elements.push([new Ground()]);
+    elements.push([new Ground(), new Sky()]);
     elements.push([new Tree()]);
 
     gogh(elements);
