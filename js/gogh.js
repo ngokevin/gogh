@@ -18,7 +18,7 @@ $(document).ready(function() {
     canvasWidth = canvas.width;
 
     var elements = [];
-    // elements.push([new Ground(), new Sky()]);
+    elements.push([new Ground(), new Sky()]);
     elements.push([new Tree()]);
 
     gogh(elements);

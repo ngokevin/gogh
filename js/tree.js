@@ -89,17 +89,17 @@ TreeChild.prototype = {
         ctx.fill();
 
         // Leaves.
-        if (this.generation >= 3 && Math.random() < .2) {
+        if (this.generation >= 2 && Math.random() < .2) {
             ctx.save();
 
-            ctx.translate(canvasWidth / 2, canvasHeight / 2);
-            ctx.rotate(this.angle);
+            ctx.translate(this.x, this.y);
+            ctx.rotate(rad(this.angle + 90));
 
             ctx.fillStyle = fuzzColor('rgb(240, 120, 120)', 70);
             ctx.shadowBlur = 0;
 
             ctx.beginPath();
-            ctx.arc(this.x, this.y, 20, 0, rad(-75), true);
+            ctx.arc(0, 0, 20, 0, rad(-75), true);
             ctx.closePath();
             ctx.fill();
 
