@@ -8,7 +8,7 @@ $(document).ready(function() {
                 window.oRequestAnimationFrame      ||
                 window.msRequestAnimationFrame     ||
                 function(callback) {
-                    window.setTimeout(callback, 1000 / 60);
+                    window.setTimeout(callback, 1000 / 30);
                 };
     })();
 
@@ -18,7 +18,7 @@ $(document).ready(function() {
     canvasWidth = canvas.width;
 
     var elements = [];
-    elements.push([new Ground(), new Sky()]);
+    // elements.push([new Ground(), new Sky()]);
     elements.push([new Tree()]);
 
     gogh(elements);

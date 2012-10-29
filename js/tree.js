@@ -88,11 +88,28 @@ TreeChild.prototype = {
         ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, true);
         ctx.fill();
 
+        // Leaves.
+        if (this.generation >= 3 && Math.random() < .2) {
+            ctx.save();
+
+            ctx.translate(canvasWidth / 2, canvasHeight / 2);
+            ctx.rotate(this.angle);
+
+            ctx.fillStyle = fuzzColor('rgb(240, 120, 120)', 70);
+            ctx.shadowBlur = 0;
+
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, 20, 0, rad(-75), true);
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.restore();
+        }
+
         this.update();
     },
 
     update: function() {
-
         // Branch less at bottom and more at top.
         var branchChance;
         if (this.generation == 0) {
