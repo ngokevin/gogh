@@ -4,6 +4,18 @@ function Tree() {
     var color = 'rgb(10, 10, 10)';
     var childNum = randInt(5, 10);
 
+    // Leaf color.
+    var rand = Math.random();
+    if (rand < .25) {
+        leafColor = '#FB717B';
+    } else if (rand < .5) {
+        leafcolor = '#FE6C00';
+    } else if (rand < .75) {
+        leafColor = '#1DD200';
+    } else {
+        leafColor = '#FB717B';
+    }
+
     var startRadius = 8;
     var groundHeight = Math.floor(canvasHeight / 3);
 
@@ -14,7 +26,8 @@ function Tree() {
 
     for (var i = 0; i < childNum; i++) {
         this.add(new TreeChild(treeBaseX + i * startRadius, treeBaseY, 90,
-                               startRadius, 2, fuzzColor(color, 10), 0));
+                               startRadius, 2, fuzzColor(color, 10),
+                               leafColor, 0));
     }
 }
 
@@ -42,6 +55,7 @@ Tree.prototype = {
                                            child.angle + randInt(-45, 45),
                                            child.radius * .9, child.speed,
                                            fuzzColor(child.color, 10),
+                                           child.leafColor,
                                            child.generation + 1));
                 }
                 that.remove(child);
@@ -62,13 +76,14 @@ Tree.prototype = {
 };
 
 
-function TreeChild(x, y, angle, radius, speed, color, generation) {
+function TreeChild(x, y, angle, radius, speed, color, leafColor, generation) {
     this.x = x;
     this.y = y;
     this.angle = angle;
     this.radius= radius;
     this.speed = speed + Math.floor(Math.random() * 5);
     this.color = color;
+    this.leafColor = leafColor,
 
     this.generation = generation;
     this.distance = 0;
@@ -89,17 +104,19 @@ TreeChild.prototype = {
         ctx.fill();
 
         // Leaves.
-        if (this.generation >= 2 && Math.random() < .2) {
+        if (this.generation >= 2 && Math.random() < .25) {
             ctx.save();
 
+            // Angle the leaves somewhat regular to the branch's angle.
             ctx.translate(this.x, this.y);
-            ctx.rotate(rad(this.angle + 90));
+            ctx.rotate(rad(this.angle + randInt(60, 120)));
 
-            ctx.fillStyle = fuzzColor('rgb(240, 120, 120)', 70);
+            ctx.fillStyle = fuzzColor(this.leafColor, 130);
             ctx.shadowBlur = 0;
 
+            // Leaf is cut-off arc, bottom-right quadrant, adjust for radius.
             ctx.beginPath();
-            ctx.arc(0, 0, 20, 0, rad(-75), true);
+            ctx.arc(-15, -15, 20, rad(-270), rad(15), true);
             ctx.closePath();
             ctx.fill();
 
@@ -134,7 +151,7 @@ TreeChild.prototype = {
         this.distance += Math.sqrt(Math.abs(oldX - this.x) + Math.abs(oldY - this.y));
 
         // Decrease radius.
-        this.radius *= (0.99 - this.generation / 250);
+        this.radius *= (0.99 - this.generation / 300);
 
         // Curve branch.
         this.angle += deg(Math.random() / 5 - 1 / 10);
