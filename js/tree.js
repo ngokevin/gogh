@@ -5,17 +5,7 @@ function Tree() {
     var childNum = randInt(5, 10);
 
     // Leaf color.
-    var leafColor;
-    var rand = Math.random();
-    if (rand < .25) {
-        leafColor = '#FB717B';
-    } else if (rand < .5) {
-        leafColor = '#FE6C00';
-    } else if (rand < .75) {
-        leafColor = '#1DD200';
-    } else {
-        leafColor = '#FB717B';
-    }
+    var leafColor = randColor(['#FB717B', '#FE6C00', '#1DD200', '#FB717B']);
 
     var startRadius = 8;
     var groundHeight = Math.floor(canvasHeight / 3);

@@ -2,7 +2,7 @@ function Ground() {
     this.speed = 9;
     this.children = [];
 
-    var color = '#138900';
+    var color = randColor(['#138900', '#A54600']);
     var childNum = 25;
 
     var height = Math.floor(canvasHeight * .33);

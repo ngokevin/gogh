@@ -2,7 +2,7 @@ function Sky() {
     this.speed = 4;
     this.children = [];
 
-    var color = '#009E8E';
+    var color = randColor(['#009E8E', '#34CFBE']);
     var childNum = 50;
 
     // Make few more children to cover the top right since drawing angled.
