@@ -56,7 +56,7 @@ function GroundChild(y, radius, speed, color) {
 GroundChild.prototype = {
     drawFrame: function() {
         ctx.fillStyle = ctx.shadowColor = this.color;
-        ctx.shadowBlur = 5;
+        ctx.shadowBlur = 8;
         ctx.shadowOffsetX = this.radius;
 
         ctx.beginPath();

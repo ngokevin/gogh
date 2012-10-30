@@ -88,7 +88,7 @@ TreeChild.prototype = {
         }
 
         ctx.fillStyle = ctx.shadowColor = this.color;
-        ctx.shadowBlur = 5;
+        ctx.shadowBlur = 3;
 
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, true);
