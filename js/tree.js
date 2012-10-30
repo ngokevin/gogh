@@ -5,11 +5,12 @@ function Tree() {
     var childNum = randInt(5, 10);
 
     // Leaf color.
+    var leafColor;
     var rand = Math.random();
     if (rand < .25) {
         leafColor = '#FB717B';
     } else if (rand < .5) {
-        leafcolor = '#FE6C00';
+        leafColor = '#FE6C00';
     } else if (rand < .75) {
         leafColor = '#1DD200';
     } else {
@@ -25,7 +26,7 @@ function Tree() {
                             canvasHeight - groundHeight * 2 / 3);
 
     for (var i = 0; i < childNum; i++) {
-        this.add(new TreeChild(treeBaseX + i * startRadius, treeBaseY, 90,
+        this.add(new TreeChild(treeBaseX + i * startRadius, treeBaseY + randInt(0, 5), 90,
                                startRadius, 2, fuzzColor(color, 10),
                                leafColor, 0));
     }
