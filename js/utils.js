@@ -1,5 +1,5 @@
 function fuzzColor(baseColor, fuzz, rgb) {
-    // Makes baseColor (string) slightly different shade based on fuzz.
+    // Makes baseColor (string) slightly different shade based on fuzz value.
     var r, g, b;
     var color = Color(baseColor);
     if (!rgb) {
@@ -29,6 +29,7 @@ function randInt (min, max) {
 
 
 function randColor(colors) {
+    // Given list of colors, choose a random color.
     var color;
     var rand = Math.random();
     for (var i=0; i < colors.length; i++) {
@@ -41,10 +42,12 @@ function randColor(colors) {
 
 
 function rad(deg) {
+    // Degrees to radians.
     return deg * Math.PI / 180;
 }
 
 
 function deg(rad) {
+    // Radians to degrees.
     return rad * 180 / Math.PI;
 }

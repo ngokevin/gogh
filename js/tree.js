@@ -4,19 +4,22 @@ function Tree() {
     var color = 'rgb(10, 10, 10)';
     var childNum = randInt(5, 10);
 
-    // Leaf color.
+    // Different possible base leaf colors.
     var leafColor = randColor(['#FB717B', '#FE6C00', '#1DD200', '#FB717B']);
 
     var startRadius = 8;
     var groundHeight = Math.floor(canvasHeight / 3);
 
-    // Place tree randomly on ground.
+    // Place tree randomly somewhere on ground.
     var treeBaseX = randInt(canvasWidth / 3, canvasWidth * 2 / 3);
     var treeBaseY = randInt(canvasHeight - groundHeight / 3,
                             canvasHeight - groundHeight * 2 / 3);
 
     for (var i = 0; i < childNum; i++) {
-        this.add(new TreeChild(treeBaseX + i * startRadius, treeBaseY + randInt(0, 5), 90,
+        // Line up the strokes horizontally, vary them slightly vertically to
+        // look like roots.
+        this.add(new TreeChild(treeBaseX + i * startRadius,
+                               treeBaseY + randInt(0, 5), 90,
                                startRadius, 2, fuzzColor(color, 10),
                                leafColor, 0));
     }
@@ -37,9 +40,8 @@ Tree.prototype = {
             if (child.done) {
                 that.remove(child);
             }
-
             // When branching, create random number of smaller branches at a
-            // different angle.
+            // different angle. Pass most of parent's attributes.
             if (child.branch) {
                 for (var i=0; i < randInt(2, 5); i++) {
                     that.add(new TreeChild(child.x, child.y,

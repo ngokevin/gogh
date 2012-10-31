@@ -7,9 +7,10 @@ function Sky() {
 
     // Make few more children to cover the top right since drawing angled.
     for (var i = 0; i < Math.floor(childNum * 4 / 3); i++) {
+        // Children to the right go faster as they have farther to cover.
         this.add(new SkyChild(canvasWidth / childNum * i - canvasWidth / childNum,
                               canvasWidth / childNum,
-                              this.speed, fuzzColor(color, 10)));
+                              this.speed * (1 + i / 100), fuzzColor(color, 10)));
     }
 }
 
@@ -58,7 +59,8 @@ function SkyChild(x, radius, speed, color) {
     // Factor in canvas rotation and translation.
     this.absY = -1 * (this.x - canvasWidth / 2) * this.angle;
 
-    this.height = canvasHeight * .66 - this.radius;
+    // Stop the sky where the ground starts.
+    this.height = canvasHeight * (1 - groundHeightPer) - this.radius;
     this.gradientHeight = canvasHeight * .33;
 }
 

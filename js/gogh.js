@@ -1,4 +1,5 @@
 var canvas, ctx, canvasHeight, canvasWidth;
+var groundHeightPer = .33;
 
 $(document).ready(function() {
      window.requestAnimFrame = (function() {
