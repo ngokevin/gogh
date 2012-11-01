@@ -1,16 +1,18 @@
 function Sky() {
-    this.speed = 4;
     this.children = [];
 
-    var color = randColor(['#009E8E', '#34CFBE']);
     var childNum = 50;
+    var radius = canvasWidth / childNum;
+    var speed = 4;
+    var color = randColor(['#009E8E', '#34CFBE']);
 
     // Make few more children to cover the top right since drawing angled.
     for (var i = 0; i < Math.floor(childNum * 4 / 3); i++) {
         // Children to the right go faster as they have farther to cover.
         this.add(new SkyChild(canvasWidth / childNum * i - canvasWidth / childNum,
-                              canvasWidth / childNum,
-                              this.speed * (1 + i / 100), fuzzColor(color, 10)));
+                              radius,
+                              speed * (1 + i / 100) + Math.floor(Math.random() * 5),
+                              fuzzColor(color, 10)));
     }
 }
 
@@ -52,7 +54,7 @@ function SkyChild(x, radius, speed, color) {
     this.x = x;
     this.y = 0;
     this.radius= radius;
-    this.speed = speed + Math.floor(Math.random() * 5);
+    this.speed = speed;
     this.color = color;
     this.angle = Math.sin(rad(45));
 

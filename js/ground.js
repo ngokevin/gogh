@@ -1,16 +1,17 @@
 function Ground() {
-    this.speed = 9;
     this.children = [];
 
-    var color = randColor(['#138900', '#A54600']);
-    var childNum = 25;
-
     var height = Math.floor(canvasHeight * groundHeightPer);
+
+    var childNum = 25;
+    var speed = 9;
+    var radius = height / childNum;
+    var color = randColor(['#138900', '#A54600']);
+
     for (var i = 0; i < childNum; i++) {
         // Draw ground at the bottom, starting from where sky will stop.
-        this.add(new GroundChild(height / childNum * i + canvasHeight - height,
-                                 height / childNum, this.speed,
-                                 fuzzColor(color, 12)));
+        this.add(new GroundChild(radius * i + canvasHeight - height,
+                                 radius, speed, fuzzColor(color, 12)));
     }
 }
 
