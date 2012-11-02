@@ -30,14 +30,7 @@ function randInt (min, max) {
 
 function randColor(colors) {
     // Given list of colors, choose a random color.
-    var color;
-    var rand = Math.random();
-    for (var i=0; i < colors.length; i++) {
-        if (rand <= i / colors.length + 1 / colors.length) {
-            return colors[i];
-        }
-    }
-    return colors([colors.length - 1]);
+	return colors[Math.floor(Math.random()*colors.length)];
 }
 
 
