@@ -6,7 +6,7 @@ function Mountain() {
     var angle = randInt(30, 60);
     var peakAngle = 180 - angle * 2;
     var height = randInt(Math.floor(.3 * skyHeight),
-                          Math.floor(.8 * skyHeight))
+                         Math.floor(.8 * skyHeight))
     var width = Math.tan(rad(peakAngle / 2)) * 2 * height;
 
     // Mountain's location, the farthest left point.
@@ -18,10 +18,11 @@ function Mountain() {
     var color = randColor(['#1046A9', '#29477F']);
 
     var maxY;
-    var childNum = width / (radius * 2);
+    var childNum = width / radius;
     for (var i = 0; i < childNum; i++) {
-        maxY = height + i * radius * Math.cos(rad(peakAngle / 2));
+        maxY = (skyHeight - height) + i * radius * Math.cos(rad(peakAngle / 1.565));
 
+        // x, y, maxY, angle, radius, speed, color
         this.add(new MountainChild(x + i * radius,
                                    skyHeight, maxY, angle, radius,
                                    speed + Math.floor(Math.random() * 5),
@@ -71,6 +72,8 @@ function MountainChild(x, y, maxY, angle,
 
 MountainChild.prototype = {
     drawFrame: function() {
+        ctx.save()
+
         ctx.fillStyle = ctx.shadowColor = this.color;
         ctx.shadowBlur = 5;
         ctx.shadowOffsetX = ctx.shadowOffsetY = this.radius;
@@ -78,6 +81,8 @@ MountainChild.prototype = {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, true);
         ctx.fill();
+
+        ctx.restore()
 
         this.update();
     },
