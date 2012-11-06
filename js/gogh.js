@@ -23,7 +23,7 @@ $(document).ready(function() {
     for (var i=0; i < 3; i++) {
         elements.push([new Mountain()]);
     }
-    // elements.push([new Tree()]);
+    elements.push([new Tree()]);
 
     gogh(elements);
 

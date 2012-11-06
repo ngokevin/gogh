@@ -2,7 +2,7 @@ function Mountain() {
     this.children = [];
 
     // Set physical properties of mountain (isosceles),
-    var skyHeight = (1 - groundHeightPer) * canvasHeight;
+    var skyHeight = (1 - groundHeightPer) * canvasHeight + 14;
     var angle = randInt(25, 60);
     var peakAngle = 180 - angle * 2;
     var height = randInt(Math.floor(.3 * skyHeight),
@@ -10,12 +10,11 @@ function Mountain() {
     var width = Math.tan(rad(peakAngle / 2)) * 2 * height;
 
     // Mountain's location, the farthest left point.
-    var x = randInt(0, canvasWidth * .66);
+    var x = randInt(canvasWidth * .33 / 2, canvasWidth * .66 / 2);
 
     var speed = 2;
     var radius = randInt(3, 5);
     var diameter = 2 * radius;
-    // var color = randColor(['#1046A9', '#29477F', 'rgb(225, 225, 255)']);
     var color = randColor(['rgb(185, 185, 205)', 'rgb(195, 195, 215)', 'rgb(205, 205, 225)']);
 
     var maxY;
@@ -69,7 +68,7 @@ Mountain.prototype = {
 function MountainChild(x, y, maxY, angle, radius, speed, gradientHeight,
                        color) {
     this.x = x;
-    this.y = y;
+    this.y = y + randInt(0, 2);
     this.maxY = maxY;
     this.angle = angle;
     this.radius= radius;
