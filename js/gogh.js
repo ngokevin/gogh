@@ -20,7 +20,7 @@ $(document).ready(function() {
 
     var elements = [];
     elements.push([new Ground(), new Sky()]);
-    for (var i=0; i < 3; i++) {
+    for (var i=0; i < randInt(1, 4); i++) {
         elements.push([new Mountain()]);
     }
     elements.push([new Tree()]);

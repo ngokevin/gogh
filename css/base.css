@@ -1,0 +1,25 @@
+body {
+  background: #1e1e1e;
+  color: #f0f0f0;
+  font-family: 'Cedarville Cursive', cursive;
+  text-align: center; }
+
+h1 {
+  font-size: 48px; }
+
+#canvas {
+  border: 50px groove #8b4513;
+  border-radius: 10px;
+  margin: 0 auto;
+  text-align: left;
+  width: 800px; }
+
+a {
+  display: block;
+  text-decoration: none;
+  color: #f0f0f0; }
+  a:hover {
+    text-decoration: underline; }
+  a#code {
+    font-size: 24px;
+    margin-top: 24px; }
